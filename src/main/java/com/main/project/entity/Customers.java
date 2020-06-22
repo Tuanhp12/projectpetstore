@@ -38,7 +38,7 @@ public class Customers {
     @NotBlank(message = "Customers address is required")
     private String address;
 
-    private String Gender;
+    private String gender;
 
     @Size(max = 30)
     @NotBlank(message = "Customers city is required")
@@ -51,10 +51,9 @@ public class Customers {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date update_At;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="orderdetail_id")
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
     @JsonIgnore
-    private Customers customer;
+    private OrderDetails orderDetail;
 
     public Customers() {
     }
@@ -67,5 +66,93 @@ public class Customers {
     @PreUpdate
     protected void opUpdate(){
         this.update_At = new Date();
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getCustomerIdentifier() {
+        return customerIdentifier;
+    }
+
+    public void setCustomerIdentifier(String customerIdentifier) {
+        this.customerIdentifier = customerIdentifier;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public Date getCreate_At() {
+        return create_At;
+    }
+
+    public void setCreate_At(Date create_At) {
+        this.create_At = create_At;
+    }
+
+    public Date getUpdate_At() {
+        return update_At;
+    }
+
+    public void setUpdate_At(Date update_At) {
+        this.update_At = update_At;
+    }
+
+    public OrderDetails getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetails orderDetail) {
+        this.orderDetail = orderDetail;
     }
 }
