@@ -36,7 +36,8 @@ public class OrderDetails {
     private List<OrderItems> projectTasks = new ArrayList<>();
 
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="customer_id", nullable = false)
     @JsonIgnore
     private Customers customer;
 
@@ -129,4 +130,6 @@ public class OrderDetails {
     public void setAccount(Accounts account) {
         this.account = account;
     }
+
+
 }
