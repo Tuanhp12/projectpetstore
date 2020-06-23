@@ -14,20 +14,80 @@ public class OrderItems {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotNull
+    private String productIdentifier;//1,2
+
+    @NotNull String orderDetailIdentifier;//1,1
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "order_item_id", updatable = false,nullable = false)
-    @JsonIgnore
-    private OrderDetails orderDetail;
+//    @JsonIgnore
+    private OrderDetails orderDetail;//1,1
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", updatable = false,nullable = false)
-    @JsonIgnore
-    private Products product;
+    @JoinColumn(name = "product_id", updatable = false)
+//    @JsonIgnore
+    private Products product;//1,2
 
-    @NotNull
-    private Integer amount;
 
-    @NotNull
-    private double priceEach;
+    private Integer amount; // orderItem
 
+
+    private double priceEach;// orderItem
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getProductIdentifier() {
+        return productIdentifier;
+    }
+
+    public void setProductIdentifier(String productIdentifier) {
+        this.productIdentifier = productIdentifier;
+    }
+
+    public String getOrderDetailIdentifier() {
+        return orderDetailIdentifier;
+    }
+
+    public void setOrderDetailIdentifier(String orderDetailIdentifier) {
+        this.orderDetailIdentifier = orderDetailIdentifier;
+    }
+
+    public OrderDetails getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(OrderDetails orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+
+    public Integer getAmount() {
+        return amount;
+    }
+
+    public void setAmount(Integer amount) {
+        this.amount = amount;
+    }
+
+    public double getPriceEach() {
+        return priceEach;
+    }
+
+    public void setPriceEach(double priceEach) {
+        this.priceEach = priceEach;
+    }
 }

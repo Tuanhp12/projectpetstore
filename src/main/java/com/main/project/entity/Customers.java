@@ -52,7 +52,7 @@ public class Customers {
     private Date update_At;
 
     @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "customer")
-    @JsonIgnore
+//    @JsonIgnore
     private OrderDetails orderDetail;
 
     public Customers() {

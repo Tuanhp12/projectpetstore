@@ -33,7 +33,7 @@ public class ProductService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Products> findOne(String categoryId, String productId) {
+    public Products findOne(String categoryId, String productId) {
         log.debug("Request to get product : {}", productId);
 
         List<Products> products = findAll(categoryId);

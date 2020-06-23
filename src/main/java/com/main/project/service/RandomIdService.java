@@ -30,7 +30,5 @@ public class RandomIdService {
         }
         return defaultOrder + s.toString();
     }
-    public void test(){
-        System.out.println("test");
-    }
+    
 }

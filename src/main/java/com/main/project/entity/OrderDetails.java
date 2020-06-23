@@ -20,6 +20,9 @@ public class OrderDetails {
     private String orderDetailIdentifier;
 
     @NotNull
+    private String customerIdentifier;
+
+    @NotNull
     private double totalPrice;
 
     @JsonFormat(pattern = "yyyy-mm-dd")
@@ -33,7 +36,7 @@ public class OrderDetails {
     private String status;
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "orderDetail", orphanRemoval = true)
-    private List<OrderItems> projectTasks = new ArrayList<>();
+    private List<OrderItems> orderItems = new ArrayList<>();
 
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -107,12 +110,12 @@ public class OrderDetails {
         this.status = status;
     }
 
-    public List<OrderItems> getProjectTasks() {
-        return projectTasks;
+    public List<OrderItems> getOrderItems() {
+        return orderItems;
     }
 
-    public void setProjectTasks(List<OrderItems> projectTasks) {
-        this.projectTasks = projectTasks;
+    public void setOrderItems(List<OrderItems> orderItems) {
+        this.orderItems = orderItems;
     }
 
     public Customers getCustomer() {
@@ -131,5 +134,12 @@ public class OrderDetails {
         this.account = account;
     }
 
+    public String getCustomerIdentifier() {
+        return customerIdentifier;
+    }
+
+    public void setCustomerIdentifier(String customerIdentifier) {
+        this.customerIdentifier = customerIdentifier;
+    }
 
 }
