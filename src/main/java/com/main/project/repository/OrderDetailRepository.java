@@ -11,5 +11,9 @@ public interface OrderDetailRepository extends JpaRepository<OrderDetails, Long>
 
     @Query("select o from OrderDetails o where o.orderDetailIdentifier = :id")
     OrderDetails findByOrderDetailIdentifier(String id);
+
+    @Query("select o from OrderDetails o where o.created_At = max(o.created_At)")
+    OrderDetails findByMostRecentDate();
+
 }
 

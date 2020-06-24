@@ -43,4 +43,8 @@ public class OrderItemService {
             throw new ResourceNotFoundException("Can't find Order Item");
         }
     }
+
+    public Iterable<OrderItems> findAllCustomer(){
+        return orderItemRepository.findAll();
+    }
 }
