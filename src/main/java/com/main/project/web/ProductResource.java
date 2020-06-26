@@ -28,7 +28,7 @@ public class ProductResource {
     }
 
     @GetMapping("/{categoryId}/{productId}")
-    public Optional<Products> getProductById(@PathVariable (value = "categoryId") String categoryId,
+    public Products getProductById(@PathVariable (value = "categoryId") String categoryId,
                                              @PathVariable (value = "productId") String productId){
         log.debug("REST request to get Product : {}", categoryId,productId );
         return productservice.findOne(categoryId,productId);
