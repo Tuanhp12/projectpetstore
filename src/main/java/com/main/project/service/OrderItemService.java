@@ -10,6 +10,8 @@ import com.main.project.repository.ProductRepository;
 import com.main.project.service.ProductService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class OrderItemService {
     private final OrderDetailRepository orderDetailRepository;
@@ -24,27 +26,21 @@ public class OrderItemService {
         this.productRepository = productRepository;
     }
 
-    public OrderItems addOrderItem(String orderDetailIdentifier, String productIdentifier, OrderItems orderItems){
+    public OrderItems addOrderItem(OrderItems orderItems){
         try{
-            if(orderDetailRepository.findByOrderDetailIdentifier(orderDetailIdentifier) == null){
-                throw new ResourceNotFoundException("Cant not find OrderDetail with :" + orderDetailIdentifier);
+            if(orderDetailRepository.findByOrderDetailIdentifier(orderItems.getOrderDetailIdentifier()) == null){
+                throw new ResourceNotFoundException("Cant not find OrderDetail with :" + orderItems.getOrderDetailIdentifier());
             }
-            OrderDetails orderDetail = orderDetailRepository.findByOrderDetailIdentifier(orderDetailIdentifier);
-            orderItems.setOrderDetailIdentifier(orderDetail.getOrderDetailIdentifier());
-            orderItems.setOrderDetail(orderDetail);
-            if(productRepository.findByProductIdentifier(productIdentifier) == null){
-                throw new ResourceNotFoundException("Cant not find Product with :" + orderDetailIdentifier);
+            if(productRepository.findByProductIdentifier(orderItems.getProductIdentifier()) == null){
+                throw new ResourceNotFoundException("Cant not find Product with :" + orderItems.getProductIdentifier());
             }
-            Products product = productRepository.findByProductIdentifier(productIdentifier);
-            orderItems.setProductIdentifier(product.getProductIdentifier());
-            orderItems.setProduct(product);
             return orderItemRepository.save(orderItems);
         }catch (Exception e){
             throw new ResourceNotFoundException("Can't find Order Item");
         }
     }
 
-    public Iterable<OrderItems> findAllCustomer(){
+    public List<OrderItems> findAllOrderItems(){
         return orderItemRepository.findAll();
     }
 }

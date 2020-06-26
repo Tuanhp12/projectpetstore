@@ -1,6 +1,7 @@
 package com.main.project.web;
 
 import com.main.project.entity.Customers;
+import com.main.project.entity.OrderDetails;
 import com.main.project.service.CustomerService;
 import com.main.project.service.MapValidationErrorService;
 import org.springframework.http.HttpStatus;
@@ -33,7 +34,7 @@ public class CustomerResource {
     }
 
     @GetMapping("/{customerId}")
-    public ResponseEntity<?> getCustomerById(@PathVariable String customerId) {
+    public ResponseEntity<?> getCustomerById(@PathVariable(value = "customerId") String customerId) {
 
         Customers customer = customerService.findCustomerByIdentifier(customerId);
 
@@ -45,11 +46,10 @@ public class CustomerResource {
         return customerService.findAllCustomer();
     }
 
-//    @DeleteMapping("/{customerId}")
-//    private ResponseEntity<?> deleteCustomer(@PathVariable String customerID){
-//        customerService.deleteProjectByIdentifier(customerID);
-//
-//        return new ResponseEntity<String>("Customer with ID: '"+customerID+"' was deleted", HttpStatus.OK);
-//    }
+    @DeleteMapping("/{productIdentifier}")
+    public ResponseEntity<?> deleteCustomer(@PathVariable(value = "productIdentifier") String id){
+        customerService.deleteProjectByIdentifier(id);
+        return new ResponseEntity<String>("Customer with ID: '"+id+"' was deleted", HttpStatus.OK);
+    }
 
 }

@@ -35,8 +35,8 @@ public class OrderDetails {
     @NotNull
     private String status;
 
-    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "orderDetail", orphanRemoval = true)
-    private List<OrderItems> orderItems = new ArrayList<>();
+//    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.LAZY, mappedBy = "orderDetail", orphanRemoval = true)
+//    private List<OrderItems> orderItems = new ArrayList<>();
 
 
     @OneToOne(fetch = FetchType.EAGER)
@@ -108,14 +108,6 @@ public class OrderDetails {
 
     public void setStatus(String status) {
         this.status = status;
-    }
-
-    public List<OrderItems> getOrderItems() {
-        return orderItems;
-    }
-
-    public void setOrderItems(List<OrderItems> orderItems) {
-        this.orderItems = orderItems;
     }
 
     public Customers getCustomer() {

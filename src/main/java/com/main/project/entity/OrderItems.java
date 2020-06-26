@@ -8,8 +8,6 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "orderItem")
 public class OrderItems {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,20 +17,17 @@ public class OrderItems {
 
     @NotNull String orderDetailIdentifier;//1,1
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "order_item_id", updatable = false,nullable = false)
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "order_item_id", nullable = false)
 //    @JsonIgnore
-    private OrderDetails orderDetail;//1,1
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "product_id", updatable = false)
+//    private OrderDetails orderDetail;//1,1
+//
+//    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+//    @JoinColumn(name = "product_id", nullable = false)
 //    @JsonIgnore
-    private Products product;//1,2
-
+//    private Products product;//1,2
 
     private Integer amount; // orderItem
-
-
     private double priceEach;// orderItem
 
     public Long getId() {
@@ -58,23 +53,6 @@ public class OrderItems {
     public void setOrderDetailIdentifier(String orderDetailIdentifier) {
         this.orderDetailIdentifier = orderDetailIdentifier;
     }
-
-    public OrderDetails getOrderDetail() {
-        return orderDetail;
-    }
-
-    public void setOrderDetail(OrderDetails orderDetail) {
-        this.orderDetail = orderDetail;
-    }
-
-    public Products getProduct() {
-        return product;
-    }
-
-    public void setProduct(Products product) {
-        this.product = product;
-    }
-
     public Integer getAmount() {
         return amount;
     }

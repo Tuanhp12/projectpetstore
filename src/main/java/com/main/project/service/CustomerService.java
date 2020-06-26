@@ -2,12 +2,13 @@ package com.main.project.service;
 
 import com.main.project.entity.Customers;
 import com.main.project.entity.OrderDetails;
-import com.main.project.entity.OrderItems;
 import com.main.project.exception.CustomerIdException;
 import com.main.project.exception.ResourceNotFoundException;
 import com.main.project.repository.CustomerRepository;
 import com.main.project.repository.OrderDetailRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CustomerService {
@@ -21,7 +22,7 @@ public class CustomerService {
 
     public Customers saveOrUpdateCustomer(Customers customer){
 
-        customer.setCustomerIdentifier(RandomIdService.returnRandomId(customer.getNameCustomer()));
+//        customer.setCustomerIdentifier(RandomIdService.returnRandomId(customer.getNameCustomer()));
 
         //only one to one can do this
         if(customer.getId() == null){
@@ -55,4 +56,11 @@ public class CustomerService {
         return customerRepository.findAll();
     }
 
+    public void deleteProjectByIdentifier(String customerId){
+        Customers customer = findCustomerByIdentifier(customerId);
+        if(customer == null){
+            throw new CustomerIdException("Customer ID '"+customerId+"' does not exist");
+        }
+        customerRepository.delete(customer);
+    }
 }
