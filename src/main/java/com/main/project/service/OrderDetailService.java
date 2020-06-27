@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 
 @Service
 public class OrderDetailService {
@@ -21,10 +23,6 @@ public class OrderDetailService {
         return orderDetailRepository.findByCustomerIdentifier(id);
     }
 
-    public OrderDetails getOrderDetailByIdentifier(String id){
-        return orderDetailRepository.findByOrderDetailIdentifier(id);
-    }
-
     public OrderDetails updateOrderDetail(String id,OrderDetails orderDetails){
         OrderDetails orderDetails1 = getOrderDetailByCustomerIdentifier(id);
         orderDetails1.setTotalPrice(orderDetails.getTotalPrice());
@@ -32,6 +30,9 @@ public class OrderDetailService {
         return orderDetailRepository.save(orderDetails1);
     }
 
+    public List<OrderDetails> getAllOrderDetail(){
+        return orderDetailRepository.findAll();
+    }
 }
 
 

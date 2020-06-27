@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 
 @RestController
@@ -26,6 +27,11 @@ public class OrderDetailResource {
     @PostMapping("/{id}")
     public OrderDetails updateOrderDetail(@PathVariable String id ,@RequestBody OrderDetails orderDetails){
         return orderDetailService.updateOrderDetail(id, orderDetails);
+    }
+
+    @GetMapping("/all")
+    public List<OrderDetails> getAllOrderDetail(){
+        return orderDetailService.getAllOrderDetail();
     }
 
     @GetMapping("/{customer_id}")
