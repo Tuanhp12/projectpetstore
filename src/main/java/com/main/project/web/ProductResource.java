@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1/products")
@@ -23,14 +22,20 @@ public class ProductResource {
 
     @GetMapping("/{categoryId}")
     public List<Products> getAllProducts(@PathVariable(value = "categoryId") String categoryId){
-        log.debug("REST request to get Products : {}", categoryId);
+        log.debug("GET request to get Products : {}", categoryId);
         return productservice.findAll(categoryId);
     }
 
     @GetMapping("/{categoryId}/{productId}")
     public Products getProductById(@PathVariable (value = "categoryId") String categoryId,
                                              @PathVariable (value = "productId") String productId){
-        log.debug("REST request to get Product : {}", categoryId,productId );
+        log.debug("GET request to get Product : {}", categoryId,productId );
         return productservice.findOne(categoryId,productId);
+    }
+
+    @PostMapping("/{categoryIdentifier}")
+    public Products createProduct(@PathVariable(value = "categoryIdentifier") String categoryId,@RequestBody Products products){
+        log.debug("POST request to get Product : {}");
+        return productservice.saveOrUpdateProduct(categoryId,products);
     }
 }
