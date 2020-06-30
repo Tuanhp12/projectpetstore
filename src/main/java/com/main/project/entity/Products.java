@@ -35,10 +35,10 @@ public class Products {
     @Size(max = 100)
     private String name;
 
-    @NotNull
     private String image;
 
     @NotBlank(message = "Project description is required")
+    @Size(max=10000)
     private String description;
 
     @NotNull

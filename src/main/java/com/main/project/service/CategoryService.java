@@ -29,9 +29,9 @@ public class CategoryService {
     }
 
     @Transactional(readOnly = true)
-    public Optional<Categories> findOne(Long id) {
-        log.debug("Request to get Category : {}", id);
-        return categoryRepository.findById(id);
+    public Optional<Categories> findOneByType(String type) {
+        log.debug("Request to get Category : {}", type);
+        return categoryRepository.findByCategoryType(type);
     }
 
     @Transactional(readOnly = true)
@@ -45,4 +45,13 @@ public class CategoryService {
         }
         throw new ResourceNotFoundException("Category Identifier " + id + " not found");
     }
+
+    public Categories saveOrUpdateCategory(Categories category){
+
+        category.setCategoryIdentifier(RandomIdService.returnRandomId(category.getType()));
+        return categoryRepository.save(category);
+    }
+
+
+
 }

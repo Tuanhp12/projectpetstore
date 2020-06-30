@@ -28,8 +28,19 @@ public class CategoryResource {
     }
 
     @GetMapping("/{categoryIdentifier}")
-    public Optional<Categories> getCategory(@PathVariable(value = "categoryIdentifier") String id) {
+    public Optional<Categories> getCategoryByIdentifier(@PathVariable(value = "categoryIdentifier") String id) {
         log.debug("REST request to get Band : {}", id);
         return categoryService.findByCategoryIdentifier(id);
+    }
+
+    @GetMapping("/{type}")
+    public Optional<Categories> getCategoryByType(@PathVariable(value = "type") String type) {
+        log.debug("REST request to get Band : {}", type);
+        return categoryService.findOneByType(type);
+    }
+
+    @PostMapping("")
+    public Categories save(@RequestBody Categories categories){
+        return categoryService.saveOrUpdateCategory(categories);
     }
 }

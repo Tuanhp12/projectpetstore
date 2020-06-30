@@ -44,5 +44,34 @@ public class ProductService {
         }
         throw new ResourceNotFoundException("Product Identifier " + productId + " not found");
     }
+
+    public Products saveOrUpdateProduct(String categoryIdentifier,Products product){
+        product.setProductIdentifier(RandomIdService.returnRandomId(product.getName()));
+        if(product.getPrice() < 0){
+            throw new ResourceNotFoundException("Product price cant lower than 0");
+        }
+        if(product.getCurrentQuantity() > 0){
+            product.setStatus("Stocking");
+        }
+        else if(product.getCurrentQuantity() < 0){
+            throw new ResourceNotFoundException("Product quantity cant lower than 0");
+        }
+        else {
+            product.setStatus("Out Stock");
+        }
+        List<Categories> categories = categoryService.findAll();
+        int check = 0;
+        for (Categories category: categories){
+            if(category.getCategoryIdentifier().contains(categoryIdentifier)) {
+                product.setCategoryIdentifier(category.getCategoryIdentifier());
+                product.setCategory(category);
+                check = 1;
+            }
+        }
+        if(check == 0){
+            throw new ResourceNotFoundException("Cant not find type product in categories");
+        }
+        return productRepository.save(product);
+    }
 }
 
