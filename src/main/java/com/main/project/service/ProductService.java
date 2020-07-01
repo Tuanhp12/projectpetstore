@@ -45,6 +45,11 @@ public class ProductService {
         throw new ResourceNotFoundException("Product Identifier " + productId + " not found");
     }
 
+    @Transactional(readOnly = true)
+    public Products findByIdentifier(String id){
+        return productRepository.findByProductIdentifier(id);
+    }
+
     public Products saveOrUpdateProduct(String categoryIdentifier,Products product){
         product.setProductIdentifier(RandomIdService.returnRandomId(product.getName()));
         if(product.getPrice() < 0){

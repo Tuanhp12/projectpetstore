@@ -26,6 +26,12 @@ public class ProductResource {
         return productservice.findAll(categoryId);
     }
 
+    @GetMapping("/product/{identifier}")
+    public  Products getProductByIdentifier(@PathVariable(value = "identifier") String productIdentifier){
+        log.debug("GET request to get Products : {}", productIdentifier);
+        return productservice.findByIdentifier(productIdentifier);
+    }
+
     @GetMapping("/{categoryId}/{productId}")
     public Products getProductById(@PathVariable (value = "categoryId") String categoryId,
                                              @PathVariable (value = "productId") String productId){
