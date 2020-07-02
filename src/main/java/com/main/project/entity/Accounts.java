@@ -34,7 +34,7 @@ public class Accounts {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="employee_id",nullable = false)
-    @JsonIgnore
+//    @JsonIgnore
     private Employees employee;
 
     public Long getId() {
